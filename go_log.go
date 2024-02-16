@@ -22,16 +22,19 @@ func search_logs(f *os.File) {
 		for scanner.Scan() {
 			text := scanner.Text()
 			if found && text == " " || text == "------------------------------------------" {
+				fetched += "\n"
 				found = false
 			}
 			if found {
 				fetched += text
 			}
 			if strings.Contains(text, searchVal) {
+				fetched += text[len(text)-8:]
+				fetched += "\n"
 				found = true
 			}
 		}
-		fmt.Println(fetched)
+		fmt.Print(fetched)
 	}
 }
 
