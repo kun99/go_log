@@ -10,7 +10,7 @@ import (
 
 var fileName string = "log.txt"
 var scanner *bufio.Scanner = bufio.NewScanner(os.Stdin)
-var date string = time.Now().Format("Monday, 02-01-2006")
+var date string = time.Now().Format("Monday, 02-01-2006 15:04:05")
 
 func search_logs(f *os.File) {
 	fmt.Print("Enter date: ")
