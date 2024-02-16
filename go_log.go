@@ -18,16 +18,20 @@ func search_logs(f *os.File) {
 		searchVal := scanner.Text()
 		scanner = bufio.NewScanner(f)
 		found := false
+		var fetched string
 		for scanner.Scan() {
 			text := scanner.Text()
-			if found {
-				fmt.Println(text)
+			if found && text == " " || text == "------------------------------------------" {
 				found = false
+			}
+			if found {
+				fetched += text
 			}
 			if strings.Contains(text, searchVal) {
 				found = true
 			}
 		}
+		fmt.Println(fetched)
 	}
 }
 
