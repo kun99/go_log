@@ -35,7 +35,22 @@ func add_log(f *os.File) {
 	fmt.Printf("Your thoughts today for %s?\n", date)
 	if scanner.Scan() {
 		input := scanner.Text()
-		fmt.Fprintf(f, "------------------------------------------\n%s\n-%s\n", date, input)
+		fmt.Fprint(f, "------------------------------------------\n")
+		fmt.Fprintf(f, "%s\n", date)
+
+		lineLength := 40
+		if len(input) <= lineLength {
+			fmt.Fprintf(f, "-%s\n", input)
+		} else {
+			fmt.Fprint(f, "-")
+			for i := 0; i < len(input); i += lineLength {
+				end := i + lineLength
+				if end > len(input) {
+					end = len(input)
+				}
+				fmt.Fprintf(f, "%s\n", input[i:end])
+			}
+		}
 		print("Have a nice day! :)")
 	}
 }
